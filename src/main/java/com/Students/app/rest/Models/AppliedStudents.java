@@ -26,6 +26,10 @@ public class AppliedStudents {
     @Column
     private String duration;
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getUSN() {
         return usn;
     }
