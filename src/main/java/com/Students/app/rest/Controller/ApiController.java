@@ -1,62 +1,50 @@
 package com.Students.app.rest.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Students.app.rest.Models.AppliedStudents;
-import com.Students.app.rest.Models.Opportunity;
-import com.Students.app.rest.Models.StudentData;
-import java.util.List;
-import com.Students.app.rest.Repo.*;
+import com.Students.app.rest.Models.Appointment;
+import com.Students.app.rest.Models.Details;
+import com.Students.app.rest.Repo.UserAP;
+import com.Students.app.rest.Repo.UserDT;
 
 @RestController
 public class ApiController {
 
     @Autowired(required = true)
-    private UserRepo userRepo;
+    private UserDT userOP;
 
     @Autowired(required = true)
-    private UserOp userOP;
-
-    @Autowired(required = true)
-    private UserAS userAS;
+    private UserAP userAS;
 
     @GetMapping(value = "/")
     public String getPage() {
         return "Welcome";
     }
 
-    @GetMapping(value = "/getAppliedStudents")
-    public List<AppliedStudents> getAppliedStudents() {
+    @GetMapping(value = "/getAppointment")
+    public List<Appointment> getAppliedStudents() {
         return userAS.findAll();
     }
 
-    @PostMapping(value = "/postAppliedStudents")
-    public void saveAppliedStudents(@RequestBody AppliedStudents as) {
+    @PostMapping(value = "/postAppointment")
+    public void saveAppliedStudents(@RequestBody Appointment as) {
         userAS.save(as);
     }
 
-    @GetMapping(value = "/getOpportunity")
-    public List<Opportunity> getOpportunity() {
+    @GetMapping(value = "/getDetails")
+    public List<Details> getOpportunity() {
         return userOP.findAll();
     }
 
-    @PostMapping(value = "/postOpportunity")
-    public void saveOpportunity(@RequestBody Opportunity op) {
+    @PostMapping(value = "/postDetails")
+    public void saveOpportunity(@RequestBody Details op) {
         userOP.save(op);
-    }
-
-    @GetMapping(value = "/getStudent")
-    public List<StudentData> getStudentData() {
-        return userRepo.findAll();
-    }
-
-    @PostMapping(value = "/postStudent")
-    public void saveStudent(@RequestBody StudentData studen) {
-        userRepo.save(studen);
     }
 
 }
